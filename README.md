@@ -68,9 +68,11 @@ The scores compare exact normalized JSON path/value pairs. The scan benchmark re
 | --- | ---: | ---: | ---: |
 | Original scans | 30 | 0.7872 | 0.9740 |
 | Reserved original scans | 6 | 0.8182 | 0.9552 |
-| PDFs with selectable text, regex | 180 | 0.9818 | 0.9980 |
+| PDFs with selectable text, regex | 180 | 0.9818 | 1.0000 |
 
 On the 30 scans, the new pipeline scored 300 true positives, 7 false positives, and 9 false negatives. The document rules supplied the values on this benchmark. ModernBERT proposed candidates but made no additional selections. Starting from the six reserved PDFs reproduced 0.9552 through the CLI with local OCR and the model enabled. The run processed 15 pages in 79.4 seconds on the development laptop. These figures use the public development documents and their internal split.
+
+The last text layout changes raised the score from 0.9980 to 1.0000 on the same 180 development PDFs (2,032 true positives, no false positives or false negatives). The extractor reads bank descriptions in adjacent columns, takes amounts from their column beside the transaction date, and preserves grantor names split across lines.
 
 The OCR-aware ModernBERT experiment reported pooled cross-fitted exact-span micro-F1 of 0.7513, versus 0.7101 for its no-OCR control. A later transfer-order candidate reported per-type cross-fitted scores of 0.7486 for appeals, 0.7074 for powers of attorney, and 0.8133 for transfers; those per-type figures come from separate profiles and are not a pooled score for the mixed bundle. None of these results measure regex-candidate verification or final JSON micro-F1. The inference config's per-type thresholds decode BIO spans; they are not calibrated candidate-acceptance thresholds. Tune candidate decisions on out-of-fold outputs using pooled TP/FP/FN and exact output-level micro-F1; keep all variants of a source case in the same fold and reserve the held-out test set.
 

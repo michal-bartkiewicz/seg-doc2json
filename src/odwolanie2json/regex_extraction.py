@@ -1557,11 +1557,8 @@ def _poa_grantor_from_block(block: str, text: str, attorney_names: list[str]) ->
     )
     declared_company = None
     if identifiers["krs"] and not individual_name:
-        prefix = re.split(
-            r"(?im)^\s*PE[ŁL]NOMOCNICTWO(?:[ \t]+PROCESOWE)?[ \t]*$",
-            block,
-            maxsplit=1,
-        )[-1]
+        heading = re.search(r"(?im)^[ \t]*PE[ŁL]NOMOCNICTWO(?:[ \t]+PROCESOWE)?[ \t]*$", block)
+        prefix = block[heading.end():] if heading else block
         for pattern in (
             r"(?is)\bdzia[łl]aj[ąa]c\s+w\s+imieniu\s+([^()]{4,160}?)\s*\(dalej\b",
             r"(?im)^[ \t]*([^\n]{4,150}?)\s+z\s+siedzib\w*\b",
@@ -1571,6 +1568,14 @@ def _poa_grantor_from_block(block: str, text: str, attorney_names: list[str]) ->
                 declared_company = _normalize_poa_company_name(_clean_org_name(match.group(1)))
                 if declared_company:
                     break
+        if heading and not declared_company:
+            paragraph = re.split(r"\n[ \t]*\n", prefix.lstrip(), maxsplit=1)[0]
+            address = re.match(
+                r"(?i)([^\n,]{4,150}?),\s+(?:ul\.|ulica\b|al\.|aleja\b|pl\.|plac\b)",
+                paragraph,
+            )
+            if address and _identifier_hits(paragraph)["krs"] == identifiers["krs"]:
+                declared_company = _normalize_poa_company_name(_clean_org_name(address.group(1)))
     authoritative_company_name = table_company_name or representation_company_name or declared_company
     company_name = authoritative_company_name or max(
         scores.values(), default=(0, None), key=lambda row: row[0]
@@ -1581,6 +1586,15 @@ def _poa_grantor_from_block(block: str, text: str, attorney_names: list[str]) ->
     if firm_match and authoritative_company_name is None:
         trade_name = _normalize_poa_company_name(_clean_org_name(firm_match.group(1)))
         if trade_name:
+            if individual_name and not _fold(trade_name).endswith(_fold(individual_name)):
+                owner = r"[ \t]+".join(re.escape(part) for part in individual_name.split())
+                continuation = re.match(
+                    rf"\r?\n[ \t]*({owner})(?=[ \t]*[,;])",
+                    block[firm_match.end():],
+                    re.IGNORECASE,
+                )
+                if continuation:
+                    trade_name = f"{trade_name} {continuation.group(1)}"
             company_name = trade_name
 
     signer_names: list[str] = []
@@ -1915,6 +1929,24 @@ def _extract_amount(text: str) -> float | None:
         if parsed is not None:
             candidates.append((score, position, parsed))
 
+    paired_header = re.compile(
+        r"(?im)^[ \t]*kwota(?:[ \t]+(?:operacji|transakcji|przelewu))?"
+        r"[ \t]{2,}data\b[^\n]*$"
+    )
+    for header in paired_header.finditer(text):
+        following = text[header.end():header.end() + 500]
+        row = next((line.strip() for line in following.splitlines()[:4] if line.strip()), "")
+        columns = re.split(r"[ \t]{2,}", row, maxsplit=1)
+        if len(columns) != 2 or not _parse_dates(columns[1]):
+            continue
+        amount = re.fullmatch(
+            rf"(?:PLN[ \t]+)?{amount_core}(?:[ \t]*(?:PLN|z[łl]))?",
+            columns[0],
+            re.IGNORECASE,
+        )
+        if amount:
+            add_candidate(amount.group("amount"), header.end(), 13)
+
     for label, priority in labels:
         for marker in re.finditer(label, text, re.IGNORECASE):
             suffix = text[marker.end():marker.end() + 90]
@@ -1982,13 +2014,12 @@ def _extract_transaction_title(text: str) -> str | None:
             re.IGNORECASE,
         )
     ]
-    # Some bank confirmations label the transaction description as "Opis:".
-    # Require a delimiter so prose such as "opis odbiorcy" is not treated as
-    # the payment title.
+    # Some confirmations put the description under "Opis" or in the next
+    # column. Within prose, only an explicit separator marks a field.
     label_matches.extend(
         re.finditer(
             rf"(?<!\w){_ocr_literal_pattern('opis')}[ \t]*[:：=]|"
-            rf"(?im:^[ \t]*{_ocr_literal_pattern('opis')}[ \t]*$)",
+            rf"(?m:^[ \t]*{_ocr_literal_pattern('opis')}(?:[ \t]*$|[ \t]{{2,}}(?=\S)))",
             text,
             re.IGNORECASE,
         )
