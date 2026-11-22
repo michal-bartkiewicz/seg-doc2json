@@ -1,81 +1,74 @@
 # hacknation2026-odwolanie2json
 
-Local extraction of Polish procurement documents into structured JSON. The pipeline uses document rules and an optional local ModernBERT token classifier. Scanned pages are recognized by Tesseract on the same machine.
+Narzędzie odczytuje polskie dokumenty związane z zamówieniami publicznymi i zapisuje wydobyte pola w JSON.
 
-## Privacy and repository size
+## Szybki start dla jury na VM
 
-- PDFs and OCR text stay local. Text PDFs use `pdftotext`; image pages use local `pdftoppm` and Polish/English Tesseract.
-- Regex extraction, type classification, and optional ModernBERT inference run locally. The model loader uses `local_files_only=True` and does not fetch weights from Hugging Face.
-- Source documents, labels, outputs, OCR images, and model checkpoints are excluded from Git. The repository stays well under 2 GB.
+Umieść pliki PDF lub tekst UTF-8 w `/opt/solution/input`. Obraz Dockera z Pythonem 3.12 i pliki modelu w `/opt/solution/model_bundle` są przygotowane na VM. W katalogu `/opt/solution` uruchom polecenie z [RUN.md](RUN.md).
 
-## Install in WSL (Ubuntu/Debian)
+```bash
+docker run --rm \
+  --cpus=2 --memory=12g \
+  -v /opt/solution/input:/input:ro \
+  -v /opt/solution/output:/output \
+  -v /opt/solution/model_bundle:/model_bundle:ro \
+  hacknation2026-odwolanie2json:latest \
+  --input /input \
+  --output /output \
+  --roberta-bundle /model_bundle \
+  --roberta-config /opt/app/transfer-order-candidate-inference-config.json \
+  --roberta-device cpu
+```
 
-The single setup script installs Poppler, Tesseract, and a Python virtual environment:
+- Pliki w katalogu wejściowym lub w dowolnych podkatalogach są klasyfikowane według treści za pomocą ważonych wyrażeń regularnych. Obsługiwane typy to odwołanie (`odwolanie`), pełnomocnictwo (`pelnomocnictwo`) i potwierdzenie przelewu (`przelew`). Jeżeli pierwszy katalog ścieżki nosi nazwę jednego z tych typów, program przyjmuje typ z katalogu.
+- Wyniki trafiają do `/opt/solution/output`. Każdy dokument zachowuje względną ścieżkę z rozszerzeniem zmienionym na `.json`. Przykładowo `input/sprawa/a.pdf` daje `output/sprawa/a.json`. Dla dokumentu odrzuconego przez klasyfikator wynik ma postać `{}`. W katalogu wynikowym powstają też `_report.json` i `_validation.json`.
+- Poppler odczytuje warstwę tekstową PDF i renderuje strony do OCR w Tesseract (`pol+eng`). Wyrażenia regularne wydobywają pola. Opcjonalny, dostrojony ModernBERT weryfikuje kandydatów lokalnie na CPU. Powyższe polecenie go włącza. Gotowe rozwiązanie działa bez zewnętrznych API, kluczy i pobierania plików podczas przetwarzania.
+
+## Uruchomienie lokalne na Linuksie lub WSL
+
+Skrypt `./setup.sh` obsługuje Debian i Ubuntu z Pythonem 3.13 lub nowszym. Tworzy środowisko `.venv` i podczas instalacji może pobierać zależności systemowe i pakiety Pythona. Umieść dokumenty w `data/documents/` i uruchom:
 
 ```bash
 ./setup.sh
-source .venv/bin/activate
-```
-
-The default install is regex-only and does not need a key or network model access. To install the optional CPU runtime for ModernBERT, use the same script:
-
-```bash
-WITH_LOCAL_ROBERTA=1 ./setup.sh
-```
-
-## Inputs
-
-```text
-data/
-  documents/
-    odwolanie/
-    pelnomocnictwo/
-    przelew/
-```
-
-Put PDFs or UTF-8 text files under `data/documents/<type>/`. The three supported types are `odwolanie`, `pelnomocnictwo`, and `przelew`. Unknown or top-level files are classified locally with weighted regex rules. No labeled samples or `expected.json` are needed for inference.
-
-## Run
-
-```bash
 PYTHONPATH=src .venv/bin/python -m odwolanie2json.main
 ```
 
-By default the regex extractor writes the result JSON directly. To verify candidates with a local fine-tuned ModernBERT bundle, supply the directory containing `odwolanie/`, `pelnomocnictwo/`, and `przelew/` checkpoints:
+Wyniki lokalne trafiają domyślnie do `outputs/`. Aby doinstalować zależności modelu CPU, użyj `WITH_LOCAL_ROBERTA=1 ./setup.sh`. Następnie przekaż do programu katalog z lokalnymi plikami modelu dla trzech typów:
 
 ```bash
 PYTHONPATH=src .venv/bin/python -m odwolanie2json.main \
-  --roberta-bundle /path/to/local/transfer-order-candidate/bundle
+  --roberta-bundle /ścieżka/do/lokalnego/modelu \
+  --roberta-device cpu
 ```
 
-Keep the bundle in a local directory. CPU is the default and `--roberta-device cuda` selects CUDA. On PDFs with selectable text, `--roberta-policy rank` lets ModernBERT reassign a principal or attorney candidate when its exact span decodes as a complete BIO role sequence. The pipeline retains the regex value when evidence is uncertain.
+## Jak działa ekstrakcja
 
-For PDFs with pages processed by Tesseract, the extractor repairs common OCR artifacts before applying document rules. It also checks receipt fields, role boundaries in powers of attorney, and headings and first claims in appeals. With the bundle enabled, the model can supply a missing field from a source span with sufficient model evidence and valid field format. The model reads the original OCR text so its offsets stay aligned with the source.
+Poppler używa `pdftotext` do odczytu PDF i `pdftoppm` do renderowania stron, których warstwa tekstowa jest niewystarczająca. Po OCR reguły korygują typowe błędy rozpoznawania. Sprawdzają też pola potwierdzeń przelewu, granice ról w pełnomocnictwach oraz nagłówki i pierwsze zarzuty w odwołaniach. Do uruchomienia nie potrzeba etykiet ani pliku `expected.json`.
 
-For powers of attorney, the model uses distinct BIO labels for principal, signatory, and attorney. Candidate support is field-aware, so a principal span does not validate an attorney field. Fields that do not have a trained span label remain under the regex rules.
+ModernBERT odczytuje pierwotny tekst OCR, dzięki czemu pozycje znaków pozostają zgodne ze źródłem. Może uzupełnić brakujące pole, gdy model wskaże fragment źródłowy i wartość ma poprawny format. W PDF-ach z zaznaczalnym tekstem polityka `--roberta-policy rank` może zmienić przypisanie kandydata do roli mocodawcy lub pełnomocnika, gdy cały wskazany fragment ma spójną sekwencję BIO. Przy niejednoznacznym wyniku program zachowuje wartość z reguł. Model wczytuje pliki z `local_files_only=True`.
 
-For principal and attorney names, regex candidates carry exact source offsets and the JSON list item that produced them. ModernBERT compares the candidate span against its BIO role scores and `O`, using the existing per-type token threshold. If a name repeats, role scoring uses its first source occurrence; later mentions cannot change that decision. The assignment is applied only to the JSON list item that proposed the name. Regex attorney alternatives that passed their source rule's minimum score can fill a role when the model gives one unambiguous assignment. A PESEL-linked attorney is not moved to principal. The same candidate evidence is exposed through `RegexExtractor.extract_with_candidates()` for future field-specific ranking.
+W pełnomocnictwach model stosuje odrębne etykiety BIO dla mocodawcy, podpisującego i pełnomocnika. Każdy kandydat ma pozycję w źródle i jest powiązany z konkretnym elementem listy JSON. Ocena roli używa pierwszego wystąpienia nazwy, porównuje etykietę roli z etykietą `O` i uwzględnia próg wytrenowany dla typu dokumentu zgodnie z konfiguracją. Alternatywny kandydat na pełnomocnika może uzupełnić pole, jeżeli spełnia próg reguły i model jednoznacznie wskazuje rolę. Pełnomocnik powiązany z numerem PESEL zachowuje swoją rolę. Pola bez wytrenowanej etykiety obsługują reguły. Metoda `RegexExtractor.extract_with_candidates()` udostępnia dane kandydatów.
 
-## Outputs and evaluation
+Pliki źródłowe, etykiety, wyniki, obrazy OCR i wagi modelu są wyłączone z Git. Repozytorium zajmuje poniżej 2 GB.
 
-Each source receives one JSON file under `outputs/` with the same relative path. Inputs the classifier rejects receive `{}`. `_report.json` contains aggregate decision counts and timing. `_validation.json` records source-presence checks, document-type signals, OCR page numbers, and per-document decision counts. Its `extraction_route` is `ocr` when Tesseract processed at least one page, `text` for documents extracted from text, and `null` for rejected documents.
+## Raporty
 
-### Local field extraction benchmark
+`_report.json` zawiera zagregowane liczniki decyzji i czas przetwarzania. `_validation.json` zawiera informacje o obecności danych w źródle, sygnałach klasyfikacji, numerach stron z OCR i liczbie decyzji dla każdego dokumentu. Pole `extraction_route` przyjmuje `ocr`, gdy Tesseract przetworzył co najmniej jedną stronę, `text` przy ekstrakcji z tekstu oraz `null` dla dokumentu odrzuconego.
 
-The scores compare exact normalized JSON path/value pairs. The scan benchmark reuses saved Tesseract text and includes classification. Six original scans from two cases were reserved from rule tuning and model fitting. The 30-scan aggregate also includes the 24 scans used during development.
+## Wyniki pomiarów lokalnych
 
-| Dataset | Documents | Before | After |
+Wyniki porównują dokładne pary znormalizowanych ścieżek i wartości JSON. Pomiar dla skanów wykorzystuje zapisany tekst z Tesseract i obejmuje klasyfikację. Sześć skanów z dwóch spraw odłożono przed dostrajaniem reguł i treningiem modelu. Zbiór 30 skanów obejmuje także 24 skany używane podczas prac nad rozwiązaniem.
+
+| Zbiór | Dokumenty | Przed | Po |
 | --- | ---: | ---: | ---: |
-| Original scans | 30 | 0.7872 | 0.9740 |
-| Reserved original scans | 6 | 0.8182 | 0.9552 |
-| PDFs with selectable text, regex | 180 | 0.9818 | 1.0000 |
+| Oryginalne skany | 30 | 0.7872 | 0.9740 |
+| Odłożone oryginalne skany | 6 | 0.8182 | 0.9552 |
+| PDF-y z zaznaczalnym tekstem, same reguły | 180 | 0.9818 | 1.0000 |
 
-On the 30 scans, the new pipeline scored 300 true positives, 7 false positives, and 9 false negatives. The document rules supplied the values on this benchmark. ModernBERT proposed candidates but made no additional selections. Starting from the six reserved PDFs reproduced 0.9552 through the CLI with local OCR and the model enabled. The run processed 15 pages in 79.4 seconds on the development laptop. These figures use the public development documents and their internal split.
+Dla 30 skanów uzyskano 300 trafień, 7 fałszywych trafień i 9 pominięć. Wartości pochodziły z reguł. ModernBERT zaproponował kandydatów, a ostateczne przypisania pozostały bez zmian. Uruchomienie CLI na sześciu odłożonych PDF-ach z lokalnym OCR i włączonym modelem odtworzyło wynik 0.9552. Przetworzenie 15 stron zajęło 79,4 s na laptopie deweloperskim. Pomiary dotyczą publicznych dokumentów używanych do rozwoju i ich wewnętrznego podziału.
 
-The last text layout changes raised the score from 0.9980 to 1.0000 on the same 180 development PDFs (2,032 true positives, no false positives or false negatives). The extractor reads bank descriptions in adjacent columns, takes amounts from their column beside the transaction date, and preserves grantor names split across lines.
+Ostatnie poprawki obsługi układu tekstu podniosły wynik z 0.9980 do 1.0000 na tych samych 180 PDF-ach (2032 trafienia, 0 fałszywych trafień i 0 pominięć). Ekstraktor czyta opisy bankowe z sąsiednich kolumn, pobiera kwoty z kolumny obok daty transakcji i zachowuje nazwy mocodawców rozbite na kilka wierszy.
 
-The OCR-aware ModernBERT experiment reported pooled cross-fitted exact-span micro-F1 of 0.7513, versus 0.7101 for its no-OCR control. A later transfer-order candidate reported per-type cross-fitted scores of 0.7486 for appeals, 0.7074 for powers of attorney, and 0.8133 for transfers; those per-type figures come from separate profiles and are not a pooled score for the mixed bundle. None of these results measure regex-candidate verification or final JSON micro-F1. The inference config's per-type thresholds decode BIO spans; they are not calibrated candidate-acceptance thresholds. Tune candidate decisions on out-of-fold outputs using pooled TP/FP/FN and exact output-level micro-F1; keep all variants of a source case in the same fold and reserve the held-out test set.
+Eksperyment z ModernBERT uwzględniającym OCR uzyskał łączne micro-F1 równe 0.7513 dla dokładnych granic fragmentów w predykcjach na odłożonych częściach podziału. Wariant kontrolny bez OCR uzyskał 0.7101. Późniejszy wariant `transfer-order-candidate` uzyskał odpowiednio 0.7486 dla odwołań, 0.7074 dla pełnomocnictw i 0.8133 dla przelewów. Wyniki pochodzą z osobnych konfiguracji i mierzą rozpoznawanie fragmentów tekstu. Progi poszczególnych typów służą do dekodowania BIO. Do strojenia akceptacji kandydatów służy micro-F1 końcowych pól JSON liczone na podstawie łącznych TP, FP i FN dla predykcji poza częścią treningową. Wszystkie warianty tej samej sprawy powinny trafić do tej samej części podziału, a zbiór testowy pozostać odłożony.
 
-The local candidate-evaluation utility is [`experiments/roberta/evaluate_candidate_predictions.py`](experiments/roberta/evaluate_candidate_predictions.py). It reports candidate recall@k, the candidate-coverage oracle, and final-field micro-F1 from JSONL. Its input contains extracted field values and must remain local; the report omits IDs and values. The utility does not generate predictions or claim a new F1 result by itself.
-
-OCR remains local and is performed only for pages without adequate selectable text. No OCR or model checkpoint is included in this repository.
+Skrypt [`evaluate_candidate_predictions.py`](experiments/roberta/evaluate_candidate_predictions.py) odczytuje gotowe predykcje z JSONL. Raportuje recall@k, maksymalny wynik przy dostępnym zbiorze kandydatów oraz micro-F1 końcowych pól. Dane wejściowe zawierają wydobyte wartości i pozostają lokalnie. Raport pomija identyfikatory i wartości.
