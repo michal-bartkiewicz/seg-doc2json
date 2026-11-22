@@ -1,0 +1,51 @@
+{
+  "bundle_profile": "transfer-order-candidate",
+  "model": "PKOBP/embed-modernbert-68m",
+  "model_revision": "5c76fc72d527c991fcff9265945649a5b3c8e1d2",
+  "device": "NVIDIA GeForce RTX 4090",
+  "bundle_composition": {
+    "odwolanie": "retained from selected OCR-aware bundle",
+    "pelnomocnictwo": "retained from selected OCR-aware bundle",
+    "przelew": "new PSM3 plus transfer-only order-augmentation fit"
+  },
+  "held_out_test_included": false,
+  "cross_fitted_validation": {
+    "document_type_f1": {
+      "odwolanie": 0.7486195873292647,
+      "pelnomocnictwo": 0.7074074074074075,
+      "przelew": 0.8133367212148266
+    },
+    "transfer_candidate_source_f1": {
+      "ocr-order-shuffled": 0.8301242549812016,
+      "ocr-perturbed": 0.8350711332684825,
+      "scan": 0.6468898074402661,
+      "text-pdf": 0.809188098821691,
+      "original-non-ocr": 0.7689881002145863
+    },
+    "note": "Per-type figures come from separate cross-validation profiles. They are not a pooled F1 for this mixed bundle."
+  },
+  "full_transfer_fit": {
+    "training_data": "full train+validation corpus with transfer-only order replacement; no test records",
+    "fixed_epochs": 7,
+    "training_seconds": 18.1453,
+    "peak_gpu_memory_gib": 3.8047,
+    "training_tokens_per_second": 68664.4,
+    "device": "NVIDIA GeForce RTX 4090"
+  },
+  "transfer_fit_configuration": {
+    "epochs": 7,
+    "entity_loss_weight": 4,
+    "learning_rate": 7e-05,
+    "batch_size": 16,
+    "window_size": 512,
+    "stride": 96,
+    "seed": 42,
+    "saved_checkpoint_dtype": "fp32",
+    "inference_threshold": 0.25
+  },
+  "baseline_fit_for_unchanged_types": {
+    "odwolanie_epochs": 14,
+    "pelnomocnictwo_epochs": 4,
+    "source_bundle": "final-ocr-order-20261122"
+  }
+}

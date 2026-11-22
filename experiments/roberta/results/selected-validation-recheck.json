@@ -1,0 +1,372 @@
+{
+  "device": "NVIDIA GeForce RTX 4090",
+  "runs": [
+    {
+      "document_type": "odwolanie",
+      "test_documents": 14,
+      "test_windows": 28,
+      "saved_bf16_checkpoint_metrics": {
+        "overall": {
+          "gold": 225,
+          "predicted": 471,
+          "correct": 193,
+          "precision": 0.40976645435244163,
+          "recall": 0.8577777777777778,
+          "f1": 0.5545977011494253
+        },
+        "by_document_type": {
+          "odwolanie": {
+            "gold": 225,
+            "predicted": 471,
+            "correct": 193,
+            "precision": 0.40976645435244163,
+            "recall": 0.8577777777777778,
+            "f1": 0.5545977011494253
+          }
+        },
+        "by_source_kind": {
+          "scan": {
+            "gold": 23,
+            "predicted": 92,
+            "correct": 15,
+            "precision": 0.16304347826086957,
+            "recall": 0.6521739130434783,
+            "f1": 0.2608695652173913
+          },
+          "text-pdf": {
+            "gold": 202,
+            "predicted": 379,
+            "correct": 178,
+            "precision": 0.46965699208443273,
+            "recall": 0.8811881188118812,
+            "f1": 0.612736660929432
+          }
+        },
+        "by_label": {
+          "APPEAL_CITY": {
+            "gold": 18,
+            "predicted": 72,
+            "correct": 17,
+            "precision": 0.2361111111111111,
+            "recall": 0.9444444444444444,
+            "f1": 0.37777777777777777
+          },
+          "APPEAL_DATE": {
+            "gold": 9,
+            "predicted": 20,
+            "correct": 5,
+            "precision": 0.25,
+            "recall": 0.5555555555555556,
+            "f1": 0.3448275862068966
+          },
+          "APPELLANT_KRS": {
+            "gold": 13,
+            "predicted": 16,
+            "correct": 12,
+            "precision": 0.75,
+            "recall": 0.9230769230769231,
+            "f1": 0.8275862068965517
+          },
+          "APPELLANT_NIP": {
+            "gold": 14,
+            "predicted": 16,
+            "correct": 14,
+            "precision": 0.875,
+            "recall": 1.0,
+            "f1": 0.9333333333333333
+          },
+          "APPELLANT_ORG": {
+            "gold": 23,
+            "predicted": 49,
+            "correct": 16,
+            "precision": 0.32653061224489793,
+            "recall": 0.6956521739130435,
+            "f1": 0.4444444444444445
+          },
+          "APPELLANT_REGON": {
+            "gold": 14,
+            "predicted": 14,
+            "correct": 14,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "AUTHORITY_KRS": {
+            "gold": 13,
+            "predicted": 16,
+            "correct": 12,
+            "precision": 0.75,
+            "recall": 0.9230769230769231,
+            "f1": 0.8275862068965517
+          },
+          "AUTHORITY_NIP": {
+            "gold": 15,
+            "predicted": 18,
+            "correct": 15,
+            "precision": 0.8333333333333334,
+            "recall": 1.0,
+            "f1": 0.9090909090909091
+          },
+          "AUTHORITY_REGON": {
+            "gold": 14,
+            "predicted": 24,
+            "correct": 14,
+            "precision": 0.5833333333333334,
+            "recall": 1.0,
+            "f1": 0.7368421052631579
+          },
+          "BZP_REFERENCE": {
+            "gold": 12,
+            "predicted": 18,
+            "correct": 12,
+            "precision": 0.6666666666666666,
+            "recall": 1.0,
+            "f1": 0.8
+          },
+          "CONTRACTING_AUTHORITY_ORG": {
+            "gold": 15,
+            "predicted": 57,
+            "correct": 11,
+            "precision": 0.19298245614035087,
+            "recall": 0.7333333333333333,
+            "f1": 0.3055555555555555
+          },
+          "COUNSEL_EMAIL": {
+            "gold": 13,
+            "predicted": 31,
+            "correct": 11,
+            "precision": 0.3548387096774194,
+            "recall": 0.8461538461538461,
+            "f1": 0.5
+          },
+          "COUNSEL_ORG": {
+            "gold": 11,
+            "predicted": 38,
+            "correct": 9,
+            "precision": 0.23684210526315788,
+            "recall": 0.8181818181818182,
+            "f1": 0.3673469387755102
+          },
+          "COUNSEL_PERSON": {
+            "gold": 14,
+            "predicted": 35,
+            "correct": 7,
+            "precision": 0.2,
+            "recall": 0.5,
+            "f1": 0.28571428571428575
+          },
+          "PROCUREMENT_REFERENCE": {
+            "gold": 12,
+            "predicted": 15,
+            "correct": 12,
+            "precision": 0.8,
+            "recall": 1.0,
+            "f1": 0.888888888888889
+          },
+          "PROCUREMENT_TITLE": {
+            "gold": 13,
+            "predicted": 22,
+            "correct": 11,
+            "precision": 0.5,
+            "recall": 0.8461538461538461,
+            "f1": 0.6285714285714286
+          },
+          "TED_REFERENCE": {
+            "gold": 2,
+            "predicted": 10,
+            "correct": 1,
+            "precision": 0.1,
+            "recall": 0.5,
+            "f1": 0.16666666666666669
+          }
+        }
+      }
+    },
+    {
+      "document_type": "pelnomocnictwo",
+      "test_documents": 14,
+      "test_windows": 21,
+      "saved_bf16_checkpoint_metrics": {
+        "overall": {
+          "gold": 96,
+          "predicted": 155,
+          "correct": 51,
+          "precision": 0.32903225806451614,
+          "recall": 0.53125,
+          "f1": 0.40637450199203184
+        },
+        "by_document_type": {
+          "pelnomocnictwo": {
+            "gold": 96,
+            "predicted": 155,
+            "correct": 51,
+            "precision": 0.32903225806451614,
+            "recall": 0.53125,
+            "f1": 0.40637450199203184
+          }
+        },
+        "by_source_kind": {
+          "scan": {
+            "gold": 17,
+            "predicted": 30,
+            "correct": 9,
+            "precision": 0.3,
+            "recall": 0.5294117647058824,
+            "f1": 0.3829787234042553
+          },
+          "text-pdf": {
+            "gold": 79,
+            "predicted": 125,
+            "correct": 42,
+            "precision": 0.336,
+            "recall": 0.5316455696202531,
+            "f1": 0.4117647058823529
+          }
+        },
+        "by_label": {
+          "ATTORNEY_PERSON": {
+            "gold": 23,
+            "predicted": 34,
+            "correct": 13,
+            "precision": 0.38235294117647056,
+            "recall": 0.5652173913043478,
+            "f1": 0.45614035087719296
+          },
+          "ATTORNEY_PESEL": {
+            "gold": 1,
+            "predicted": 0,
+            "correct": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "PRINCIPAL_KRS": {
+            "gold": 17,
+            "predicted": 17,
+            "correct": 17,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "PRINCIPAL_NIP": {
+            "gold": 17,
+            "predicted": 18,
+            "correct": 13,
+            "precision": 0.7222222222222222,
+            "recall": 0.7647058823529411,
+            "f1": 0.7428571428571428
+          },
+          "PRINCIPAL_ORG": {
+            "gold": 22,
+            "predicted": 53,
+            "correct": 3,
+            "precision": 0.05660377358490566,
+            "recall": 0.13636363636363635,
+            "f1": 0.08
+          },
+          "SIGNATORY_PERSON": {
+            "gold": 16,
+            "predicted": 33,
+            "correct": 5,
+            "precision": 0.15151515151515152,
+            "recall": 0.3125,
+            "f1": 0.20408163265306123
+          }
+        }
+      }
+    },
+    {
+      "document_type": "przelew",
+      "test_documents": 14,
+      "test_windows": 14,
+      "saved_bf16_checkpoint_metrics": {
+        "overall": {
+          "gold": 43,
+          "predicted": 92,
+          "correct": 28,
+          "precision": 0.30434782608695654,
+          "recall": 0.6511627906976745,
+          "f1": 0.41481481481481486
+        },
+        "by_document_type": {
+          "przelew": {
+            "gold": 43,
+            "predicted": 92,
+            "correct": 28,
+            "precision": 0.30434782608695654,
+            "recall": 0.6511627906976745,
+            "f1": 0.41481481481481486
+          }
+        },
+        "by_source_kind": {
+          "scan": {
+            "gold": 10,
+            "predicted": 36,
+            "correct": 6,
+            "precision": 0.16666666666666666,
+            "recall": 0.6,
+            "f1": 0.2608695652173913
+          },
+          "text-pdf": {
+            "gold": 33,
+            "predicted": 56,
+            "correct": 22,
+            "precision": 0.39285714285714285,
+            "recall": 0.6666666666666666,
+            "f1": 0.49438202247191004
+          }
+        },
+        "by_label": {
+          "DESTINATION_ACCOUNT": {
+            "gold": 4,
+            "predicted": 4,
+            "correct": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "OPERATION_DATE": {
+            "gold": 15,
+            "predicted": 35,
+            "correct": 11,
+            "precision": 0.3142857142857143,
+            "recall": 0.7333333333333333,
+            "f1": 0.44
+          },
+          "SOURCE_ACCOUNT": {
+            "gold": 4,
+            "predicted": 11,
+            "correct": 2,
+            "precision": 0.18181818181818182,
+            "recall": 0.5,
+            "f1": 0.26666666666666666
+          },
+          "TRANSACTION_ID": {
+            "gold": 13,
+            "predicted": 16,
+            "correct": 10,
+            "precision": 0.625,
+            "recall": 0.7692307692307693,
+            "f1": 0.6896551724137931
+          },
+          "TRANSFER_AMOUNT": {
+            "gold": 5,
+            "predicted": 12,
+            "correct": 5,
+            "precision": 0.4166666666666667,
+            "recall": 1.0,
+            "f1": 0.5882352941176471
+          },
+          "TRANSFER_TITLE": {
+            "gold": 2,
+            "predicted": 14,
+            "correct": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        }
+      }
+    }
+  ]
+}

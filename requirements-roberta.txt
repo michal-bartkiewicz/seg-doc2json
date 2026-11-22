@@ -1,0 +1,6 @@
+# Optional CPU-only runtime for local ModernBERT inference.
+# Prefer the official CPU wheel index so CPU installs do not pull CUDA packages.
+--index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://pypi.org/simple
+torch>=2.5,<3
+transformers>=4.50,<5

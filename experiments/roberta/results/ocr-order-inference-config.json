@@ -1,0 +1,84 @@
+{
+  "model": "PKOBP/embed-modernbert-68m",
+  "model_revision": "5c76fc72d527c991fcff9265945649a5b3c8e1d2",
+  "selected_setup": "ocr-aware-modernbert",
+  "training_source_kinds": [
+    "ocr-perturbed",
+    "ocr-order-shuffled",
+    "scan",
+    "text-pdf",
+    "synthetic",
+    "synthetic-context"
+  ],
+  "validation_design": "3-fold group CV over original train+validation cases; document types from one case stay together",
+  "test_documents_included": false,
+  "training_selection_metric": "pooled exact-span micro-F1 with threshold cross-fitted from the other two folds",
+  "threshold_calibration_note": "for each fold, apply the median threshold selected on the other folds; same-fold tuned metrics are diagnostic only",
+  "selected_by_type": {
+    "odwolanie": {
+      "entity_loss_weight": 4,
+      "median_best_epoch": 14,
+      "median_validation_threshold": 0.75,
+      "window_size": 512,
+      "stride": 96,
+      "cross_fitted_threshold_f1": 0.7486195873292647,
+      "source_f1": {
+        "ocr-perturbed": 0.7669616519174042,
+        "ocr-order-shuffled": 0.7251798561151079,
+        "scan": 0.5038167938931298,
+        "text-pdf": 0.7862679955703211,
+        "original-non-ocr": 0.7504835589941974
+      }
+    },
+    "pelnomocnictwo": {
+      "entity_loss_weight": 1,
+      "median_best_epoch": 4,
+      "median_validation_threshold": 0.0,
+      "window_size": 512,
+      "stride": 96,
+      "cross_fitted_threshold_f1": 0.7074074074074075,
+      "source_f1": {
+        "ocr-perturbed": 0.7251732101616629,
+        "ocr-order-shuffled": 0.6474820143884893,
+        "scan": 0.528,
+        "text-pdf": 0.7689922480620156,
+        "original-non-ocr": 0.7298701298701298
+      }
+    },
+    "przelew": {
+      "entity_loss_weight": 4,
+      "median_best_epoch": 8,
+      "median_validation_threshold": 1.25,
+      "window_size": 512,
+      "stride": 96,
+      "cross_fitted_threshold_f1": 0.8051075268817205,
+      "source_f1": {
+        "ocr-perturbed": 0.8230769230769232,
+        "ocr-order-shuffled": 0.8091603053435115,
+        "scan": 0.6285714285714286,
+        "text-pdf": 0.8259587020648967,
+        "original-non-ocr": 0.7792792792792792
+      }
+    }
+  },
+  "final_training": {
+    "learning_rate": 7e-05,
+    "batch_size": 16,
+    "validation_dtype": "bf16",
+    "saved_checkpoint_dtype": "fp32",
+    "window_size": 512,
+    "stride": 96,
+    "seed": 42,
+    "test_evaluation": "skipped",
+    "entity_loss_weight_by_type": {
+      "odwolanie": 4,
+      "pelnomocnictwo": 1,
+      "przelew": 4
+    },
+    "epochs_by_type": {
+      "odwolanie": 14,
+      "pelnomocnictwo": 4,
+      "przelew": 8
+    }
+  }
+}

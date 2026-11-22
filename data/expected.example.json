@@ -1,0 +1,30 @@
+{
+  "schema_examples": {
+    "typ-dokumentu": {
+      "pole_z_oczekiwanego_json": "wartość przykładowa"
+    }
+  },
+  "samples": [
+    {
+      "document_type": "typ-dokumentu",
+      "file": "data/samples/typ-dokumentu/przyklad-1.pdf",
+      "response": {
+        "pole_z_oczekiwanego_json": "wartość przepisana z dokumentu"
+      }
+    },
+    {
+      "document_type": "typ-dokumentu",
+      "file": "data/samples/typ-dokumentu/przyklad-2.pdf",
+      "response": {
+        "pole_z_oczekiwanego_json": "inna wartość"
+      }
+    },
+    {
+      "document_type": "typ-dokumentu",
+      "file": "data/samples/typ-dokumentu/przyklad-3.pdf",
+      "response": {
+        "pole_z_oczekiwanego_json": "kolejna wartość"
+      }
+    }
+  ]
+}

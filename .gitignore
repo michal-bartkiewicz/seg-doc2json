@@ -1,0 +1,30 @@
+# Credentials and local configuration
+gemini.key
+.env
+
+# Private source documents and generated material
+data/expected.json
+data/documents/
+data/samples/
+data/ground_truth/
+data/upstream/
+data/benchmark180/
+outputs/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.webp
+*.txt
+!README.txt
+!requirements.txt
+!requirements-roberta.txt
+
+# Local runtime
+.runtime/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/

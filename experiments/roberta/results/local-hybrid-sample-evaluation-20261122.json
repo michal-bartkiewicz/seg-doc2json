@@ -1,0 +1,55 @@
+{
+  "evaluation": "reference-samples-only",
+  "source": "data/expected.json:samples",
+  "document_count": 9,
+  "documents_by_type": {
+    "odwolanie": 3,
+    "pelnomocnictwo": 3,
+    "przelew": 3
+  },
+  "field_value_metric": "micro-F1 over exact normalized JSON path/value pairs",
+  "thresholds_used": {
+    "odwolanie": 0.75,
+    "pelnomocnictwo": 0.0,
+    "przelew": 0.25
+  },
+  "threshold_note": "Token-level logit offsets from grouped cross-fitted validation; the nine reference samples were not used to tune them.",
+  "cross_fitted_model_only_f1_by_type": {
+    "odwolanie": 0.7486195873292647,
+    "pelnomocnictwo": 0.7074074074074075,
+    "przelew": 0.8133367212148266
+  },
+  "sample_set_results": {
+    "regex": {
+      "odwolanie": {"tp": 60, "fp": 0, "fn": 0, "micro_f1": 1.0},
+      "pelnomocnictwo": {"tp": 19, "fp": 1, "fn": 1, "micro_f1": 0.95},
+      "przelew": {"tp": 16, "fp": 1, "fn": 2, "micro_f1": 0.9142857142857143},
+      "pooled": {"tp": 95, "fp": 2, "fn": 3, "micro_f1": 0.9743589743589743}
+    },
+    "regex_modernbert_rank": {
+      "odwolanie": {"tp": 60, "fp": 0, "fn": 0, "micro_f1": 1.0},
+      "pelnomocnictwo": {"tp": 19, "fp": 1, "fn": 1, "micro_f1": 0.95},
+      "przelew": {"tp": 16, "fp": 1, "fn": 2, "micro_f1": 0.9142857142857143},
+      "pooled": {"tp": 95, "fp": 2, "fn": 3, "micro_f1": 0.9743589743589743}
+    }
+  },
+  "local_run": {
+    "base_model": "PKOBP/embed-modernbert-68m",
+    "base_model_revision": "5c76fc72d527c991fcff9265945649a5b3c8e1d2",
+    "fine_tuned_bundle": "final-transfer-order-20261122/candidate/bundle",
+    "bundle_size_mib": 794,
+    "device": "CPU",
+    "torch": "2.15.0+cpu",
+    "transformers": "4.57.6",
+    "input_tokens": 6795,
+    "model_seconds_including_lazy_load": 4.16,
+    "tokens_per_second_including_lazy_load": 1631.75,
+    "locally_ocr_scanned_pages": 0,
+    "role_reassignments": 0,
+    "removed_values": 0
+  },
+  "limitations": [
+    "Only nine labeled reference samples were evaluated; this score is not a representative cross-validation result.",
+    "The cross-fitted per-type scores describe the token model, not the hybrid output-level score."
+  ]
+}

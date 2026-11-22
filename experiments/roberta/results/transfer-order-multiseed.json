@@ -1,0 +1,99 @@
+{
+  "experiment": "PSM3 with transfer-only OCR line-order replacement",
+  "model": "PKOBP/embed-modernbert-68m",
+  "validation_design": "Three 3-fold group CV runs; train and validation only; held-out test excluded.",
+  "training_data_note": "Local OCR; only aggregate metrics are stored in this file. No document text or identifiers.",
+  "document_type": "przelew",
+  "candidate_seeds": {
+    "2027": {
+      "cross_fitted_threshold_f1": 0.8112560054907343,
+      "out_of_fold_f1": 0.813858695652174,
+      "median_best_epoch": 8,
+      "median_validation_threshold": 1.75,
+      "source_cross_fitted_f1": {
+        "ocr-order-shuffled": 0.8223938223938223,
+        "ocr-perturbed": 0.8287937743190661,
+        "scan": 0.6055045871559633,
+        "text-pdf": 0.8354430379746836,
+        "original-non-ocr": 0.7764705882352941
+      }
+    },
+    "2028": {
+      "cross_fitted_threshold_f1": 0.8102633355840648,
+      "out_of_fold_f1": 0.812964213369345,
+      "median_best_epoch": 5,
+      "median_validation_threshold": 0.25,
+      "source_cross_fitted_f1": {
+        "ocr-order-shuffled": 0.8352941176470587,
+        "ocr-perturbed": 0.8398437500000001,
+        "scan": 0.6428571428571428,
+        "text-pdf": 0.7838616714697405,
+        "original-non-ocr": 0.7494553376906318
+      }
+    },
+    "2029": {
+      "cross_fitted_threshold_f1": 0.8184908225696805,
+      "out_of_fold_f1": 0.8198504418762746,
+      "median_best_epoch": 7,
+      "median_validation_threshold": 0.0,
+      "source_cross_fitted_f1": {
+        "ocr-order-shuffled": 0.8326848249027238,
+        "ocr-perturbed": 0.8365758754863812,
+        "scan": 0.6923076923076923,
+        "text-pdf": 0.8082595870206489,
+        "original-non-ocr": 0.781038374717833
+      }
+    }
+  },
+  "candidate_mean": {
+    "cross_fitted_threshold_f1": 0.8133367212148266,
+    "out_of_fold_f1": 0.8155577836325979,
+    "median_best_epoch": 7,
+    "median_validation_threshold": 0.25,
+    "source_cross_fitted_f1": {
+      "ocr-order-shuffled": 0.8301242549812016,
+      "ocr-perturbed": 0.8350711332684825,
+      "scan": 0.6468898074402661,
+      "text-pdf": 0.809188098821691,
+      "original-non-ocr": 0.7689881002145863
+    },
+    "delta_vs_historical_selected_baseline": 0.008229194333106093,
+    "historical_selected_baseline_cross_fitted_threshold_f1": 0.8051075268817205,
+    "historical_baseline_source_cross_fitted_f1": {
+      "ocr-perturbed": 0.8230769230769232,
+      "ocr-order-shuffled": 0.8091603053435115,
+      "scan": 0.6285714285714286,
+      "text-pdf": 0.8259587020648967,
+      "original-non-ocr": 0.7792792792792792
+    }
+  },
+  "paired_seed_comparison": {
+    "seed": 2027,
+    "baseline_cross_fitted_threshold_f1": 0.7861507128309572,
+    "transfer_order_cross_fitted_threshold_f1": 0.8112560054907343,
+    "delta": 0.025105292659777123,
+    "source_cross_fitted_f1": {
+      "ocr-order-shuffled": {
+        "baseline": 0.780114722753346,
+        "transfer_order": 0.8223938223938223
+      },
+      "ocr-perturbed": {
+        "baseline": 0.8140900195694716,
+        "transfer_order": 0.8287937743190661
+      },
+      "scan": {
+        "baseline": 0.6476190476190475,
+        "transfer_order": 0.6055045871559633
+      },
+      "text-pdf": {
+        "baseline": 0.7964071856287425,
+        "transfer_order": 0.8354430379746836
+      },
+      "original-non-ocr": {
+        "baseline": 0.7608200455580866,
+        "transfer_order": 0.7764705882352941
+      }
+    }
+  },
+  "interpretation": "Transfer-only replacement raised aggregate CV F1 on average, with source-level tradeoffs; scans/OCR and shuffled OCR improve while selectable-text PDFs and original non-OCR average are lower. Treat as a candidate, not an untouched-test result."
+}

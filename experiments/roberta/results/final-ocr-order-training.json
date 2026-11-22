@@ -1,0 +1,120 @@
+{
+  "model": "PKOBP/embed-modernbert-68m",
+  "model_revision": "5c76fc72d527c991fcff9265945649a5b3c8e1d2",
+  "device": "NVIDIA GeForce RTX 4090",
+  "training_data": {
+    "records": 2862,
+    "test_records": 0,
+    "source_counts": {
+      "ocr-order-shuffled": 106,
+      "ocr-perturbed": 108,
+      "scan": 24,
+      "text-pdf": 146,
+      "synthetic": 2346,
+      "synthetic-context": 132
+    },
+    "document_type_records": {
+      "odwolanie": 876,
+      "pelnomocnictwo": 912,
+      "przelew": 1074
+    }
+  },
+  "training_configuration": {
+    "learning_rate": 7e-05,
+    "batch_size": 16,
+    "validation_dtype": "bf16",
+    "saved_checkpoint_dtype": "fp32",
+    "window_size": 512,
+    "stride": 96,
+    "seed": 42,
+    "test_evaluation": "skipped",
+    "entity_loss_weight_by_type": {
+      "odwolanie": 4,
+      "pelnomocnictwo": 1,
+      "przelew": 4
+    },
+    "epochs_by_type": {
+      "odwolanie": 14,
+      "pelnomocnictwo": 4,
+      "przelew": 8
+    }
+  },
+  "cross_fitted_validation": {
+    "pooled_f1": 0.7512597343105818,
+    "by_document_type": {
+      "odwolanie": 0.7486195873292647,
+      "pelnomocnictwo": 0.7074074074074075,
+      "przelew": 0.8051075268817205
+    },
+    "pooled_by_source_kind": {
+      "ocr-perturbed": 0.773758430410791,
+      "ocr-order-shuffled": 0.7322738386308069,
+      "scan": 0.5365853658536586,
+      "text-pdf": 0.7870967741935484,
+      "original-non-ocr": 0.749542961608775
+    },
+    "warning": "Cross-fitted validation metrics are from model selection and are not an untouched test score."
+  },
+  "runs": {
+    "przelew": {
+      "train_records": 1074,
+      "train_windows": 1076,
+      "epochs": 8,
+      "training_seconds": 20.450264518964104,
+      "training_tokens_per_second": 68335.15521053945,
+      "peak_gpu_memory_gib": 3.7997488975524902,
+      "epoch_mean_losses": [
+        0.28184056282043457,
+        0.021428460255265236,
+        0.006211514119058847,
+        0.004279379732906818,
+        0.004772735759615898,
+        0.0021286222618073225,
+        0.005240455269813538,
+        0.0022294323425740004
+      ],
+      "test_evaluation": "skipped"
+    },
+    "pelnomocnictwo": {
+      "train_records": 912,
+      "train_windows": 980,
+      "epochs": 4,
+      "training_seconds": 11.017031043069437,
+      "training_tokens_per_second": 57333.41383269976,
+      "peak_gpu_memory_gib": 3.7952370643615723,
+      "epoch_mean_losses": [
+        0.21277020871639252,
+        0.008765649050474167,
+        0.001394172664731741,
+        0.0006732679903507233
+      ],
+      "test_evaluation": "skipped"
+    },
+    "odwolanie": {
+      "train_records": 876,
+      "train_windows": 970,
+      "epochs": 14,
+      "training_seconds": 37.00140183698386,
+      "training_tokens_per_second": 95464.653354548,
+      "peak_gpu_memory_gib": 3.8048291206359863,
+      "epoch_mean_losses": [
+        0.4768136441707611,
+        0.018625354394316673,
+        0.007233267184346914,
+        0.004075964447110891,
+        0.0029199954587966204,
+        0.0022401490714401007,
+        0.0021763441618531942,
+        0.0008662140462547541,
+        0.0016128765419125557,
+        0.0016716000391170382,
+        0.0005499065737240016,
+        0.0002810465230140835,
+        0.0003218164492864162,
+        0.00010716794349718839
+      ],
+      "test_evaluation": "skipped"
+    }
+  },
+  "total_training_seconds": 68.4686973990174
+}

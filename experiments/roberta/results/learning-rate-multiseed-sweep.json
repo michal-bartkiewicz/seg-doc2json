@@ -1,0 +1,1075 @@
+{
+  "model": "PKOBP/embed-modernbert-68m",
+  "dataset": {
+    "base_records": 212,
+    "synthetic_records": 2460,
+    "validation_records": 21,
+    "test_records": 42
+  },
+  "selection_metric": "validation exact-span micro-F1, selected separately by document type",
+  "selection_uses_test_metrics": false,
+  "lr_seed_sweep_runs_skip_test_evaluation": true,
+  "candidates": [
+    {
+      "run": "3e-5-seed42-weight1",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.6872586872586872,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "3e-5-seed42-weight1",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 6,
+      "best_validation_exact_span_f1": 0.7592592592592592,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "3e-5-seed42-weight1",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 7,
+      "best_validation_exact_span_f1": 0.9090909090909091,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    },
+    {
+      "run": "3e-5-seed42-weight4",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.746031746031746,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "3e-5-seed42-weight4",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 7,
+      "best_validation_exact_span_f1": 0.7592592592592592,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "3e-5-seed42-weight4",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 3e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 7,
+      "best_validation_exact_span_f1": 0.9259259259259259,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    },
+    {
+      "run": "2e-5-seed42-weight1",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 2e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.6846153846153845,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "2e-5-seed42-weight1",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 2e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.6666666666666666,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "2e-5-seed42-weight1",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 2e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 3,
+      "best_validation_exact_span_f1": 0.7719298245614034,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    },
+    {
+      "run": "2e-5-seed42-weight4",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 2e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 7,
+      "best_validation_exact_span_f1": 0.654275092936803,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "2e-5-seed42-weight4",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 2e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 7,
+      "best_validation_exact_span_f1": 0.6788990825688074,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "2e-5-seed42-weight4",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 2e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 6,
+      "best_validation_exact_span_f1": 0.8928571428571429,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    },
+    {
+      "run": "5e-5-seed42-weight1",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.793388429752066,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "5e-5-seed42-weight1",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.7999999999999999,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "5e-5-seed42-weight1",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.8135593220338982,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    },
+    {
+      "run": "5e-5-seed42-weight4",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 6,
+      "best_validation_exact_span_f1": 0.7272727272727273,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "5e-5-seed42-weight4",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.7889908256880733,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "5e-5-seed42-weight4",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 42
+      },
+      "best_epoch": 6,
+      "best_validation_exact_span_f1": 0.9310344827586207,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    },
+    {
+      "run": "5e-5-seed123-weight1",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 123
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.7808764940239042,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "5e-5-seed123-weight1",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 123
+      },
+      "best_epoch": 5,
+      "best_validation_exact_span_f1": 0.8543689320388349,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "5e-5-seed123-weight1",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 1.0,
+        "seed": 123
+      },
+      "best_epoch": 3,
+      "best_validation_exact_span_f1": 0.9056603773584904,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    },
+    {
+      "run": "5e-5-seed123-weight4",
+      "document_type": "odwolanie",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 123
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.8181818181818181,
+      "training_documents": 831,
+      "validation_documents": 7,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "run": "5e-5-seed123-weight4",
+      "document_type": "pelnomocnictwo",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 123
+      },
+      "best_epoch": 8,
+      "best_validation_exact_span_f1": 0.7207207207207208,
+      "training_documents": 843,
+      "validation_documents": 7,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "run": "5e-5-seed123-weight4",
+      "document_type": "przelew",
+      "hyperparameters": {
+        "learning_rate": 5e-05,
+        "batch_size": 8,
+        "entity_loss_weight": 4.0,
+        "seed": 123
+      },
+      "best_epoch": 6,
+      "best_validation_exact_span_f1": 0.8571428571428571,
+      "training_documents": 935,
+      "validation_documents": 7,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    }
+  ],
+  "selected": [
+    {
+      "document_type": "odwolanie",
+      "selected_run": "run-v10-seed123-lr5e5-w4",
+      "best_epoch": 8,
+      "validation_exact_span_f1": 0.8181818181818181,
+      "training_label_support": {
+        "APPEAL_DATE": 814,
+        "ACTION_DATE": 782,
+        "APPEAL_CITY": 873,
+        "APPELLANT_ORG": 859,
+        "APPELLANT_NIP": 831,
+        "APPELLANT_REGON": 827,
+        "APPELLANT_KRS": 826,
+        "COUNSEL_PERSON": 830,
+        "COUNSEL_ORG": 825,
+        "COUNSEL_EMAIL": 825,
+        "CONTRACTING_AUTHORITY_ORG": 833,
+        "AUTHORITY_NIP": 832,
+        "AUTHORITY_REGON": 828,
+        "AUTHORITY_KRS": 822,
+        "BZP_REFERENCE": 810,
+        "PROCUREMENT_REFERENCE": 826,
+        "TED_REFERENCE": 794,
+        "PROCUREMENT_TITLE": 827
+      }
+    },
+    {
+      "document_type": "pelnomocnictwo",
+      "selected_run": "run-v10-seed123-lr5e5-w1",
+      "best_epoch": 5,
+      "validation_exact_span_f1": 0.8543689320388349,
+      "training_label_support": {
+        "PRINCIPAL_PERSON": 195,
+        "PRINCIPAL_KRS": 640,
+        "PRINCIPAL_ORG": 644,
+        "PRINCIPAL_NIP": 645,
+        "SIGNATORY_PERSON": 832,
+        "ATTORNEY_PERSON": 884,
+        "ATTORNEY_PESEL": 804
+      }
+    },
+    {
+      "document_type": "przelew",
+      "selected_run": "run-v9-lr5e5-w4",
+      "best_epoch": 6,
+      "validation_exact_span_f1": 0.9310344827586207,
+      "training_label_support": {
+        "OPERATION_DATE": 940,
+        "TRANSFER_AMOUNT": 850,
+        "DESTINATION_ACCOUNT": 895,
+        "TRANSACTION_ID": 851,
+        "TRANSFER_TITLE": 801,
+        "SOURCE_ACCOUNT": 895
+      }
+    }
+  ],
+  "saved_bf16_test_recheck": {
+    "device": "NVIDIA GeForce RTX 4090",
+    "runs": [
+      {
+        "document_type": "odwolanie",
+        "test_documents": 14,
+        "test_windows": 28,
+        "saved_bf16_checkpoint_metrics": {
+          "overall": {
+            "gold": 225,
+            "predicted": 241,
+            "correct": 213,
+            "precision": 0.8838174273858921,
+            "recall": 0.9466666666666667,
+            "f1": 0.9141630901287553
+          },
+          "by_document_type": {
+            "odwolanie": {
+              "gold": 225,
+              "predicted": 241,
+              "correct": 213,
+              "precision": 0.8838174273858921,
+              "recall": 0.9466666666666667,
+              "f1": 0.9141630901287553
+            }
+          },
+          "by_source_kind": {
+            "scan": {
+              "gold": 23,
+              "predicted": 31,
+              "correct": 18,
+              "precision": 0.5806451612903226,
+              "recall": 0.782608695652174,
+              "f1": 0.6666666666666667
+            },
+            "text-pdf": {
+              "gold": 202,
+              "predicted": 210,
+              "correct": 195,
+              "precision": 0.9285714285714286,
+              "recall": 0.9653465346534653,
+              "f1": 0.9466019417475728
+            }
+          },
+          "by_label": {
+            "APPEAL_CITY": {
+              "gold": 18,
+              "predicted": 20,
+              "correct": 18,
+              "precision": 0.9,
+              "recall": 1.0,
+              "f1": 0.9473684210526316
+            },
+            "APPEAL_DATE": {
+              "gold": 9,
+              "predicted": 9,
+              "correct": 8,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "APPELLANT_KRS": {
+              "gold": 13,
+              "predicted": 15,
+              "correct": 13,
+              "precision": 0.8666666666666667,
+              "recall": 1.0,
+              "f1": 0.9285714285714286
+            },
+            "APPELLANT_NIP": {
+              "gold": 14,
+              "predicted": 17,
+              "correct": 14,
+              "precision": 0.8235294117647058,
+              "recall": 1.0,
+              "f1": 0.9032258064516129
+            },
+            "APPELLANT_ORG": {
+              "gold": 23,
+              "predicted": 25,
+              "correct": 21,
+              "precision": 0.84,
+              "recall": 0.9130434782608695,
+              "f1": 0.8749999999999999
+            },
+            "APPELLANT_REGON": {
+              "gold": 14,
+              "predicted": 13,
+              "correct": 12,
+              "precision": 0.9230769230769231,
+              "recall": 0.8571428571428571,
+              "f1": 0.888888888888889
+            },
+            "AUTHORITY_KRS": {
+              "gold": 13,
+              "predicted": 13,
+              "correct": 13,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "AUTHORITY_NIP": {
+              "gold": 15,
+              "predicted": 15,
+              "correct": 15,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "AUTHORITY_REGON": {
+              "gold": 14,
+              "predicted": 14,
+              "correct": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "BZP_REFERENCE": {
+              "gold": 12,
+              "predicted": 12,
+              "correct": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "CONTRACTING_AUTHORITY_ORG": {
+              "gold": 15,
+              "predicted": 17,
+              "correct": 13,
+              "precision": 0.7647058823529411,
+              "recall": 0.8666666666666667,
+              "f1": 0.8125
+            },
+            "COUNSEL_EMAIL": {
+              "gold": 13,
+              "predicted": 13,
+              "correct": 12,
+              "precision": 0.9230769230769231,
+              "recall": 0.9230769230769231,
+              "f1": 0.9230769230769231
+            },
+            "COUNSEL_ORG": {
+              "gold": 11,
+              "predicted": 12,
+              "correct": 11,
+              "precision": 0.9166666666666666,
+              "recall": 1.0,
+              "f1": 0.9565217391304348
+            },
+            "COUNSEL_PERSON": {
+              "gold": 14,
+              "predicted": 18,
+              "correct": 11,
+              "precision": 0.6111111111111112,
+              "recall": 0.7857142857142857,
+              "f1": 0.6875000000000001
+            },
+            "PROCUREMENT_REFERENCE": {
+              "gold": 12,
+              "predicted": 13,
+              "correct": 12,
+              "precision": 0.9230769230769231,
+              "recall": 1.0,
+              "f1": 0.9600000000000001
+            },
+            "PROCUREMENT_TITLE": {
+              "gold": 13,
+              "predicted": 13,
+              "correct": 12,
+              "precision": 0.9230769230769231,
+              "recall": 0.9230769230769231,
+              "f1": 0.9230769230769231
+            },
+            "TED_REFERENCE": {
+              "gold": 2,
+              "predicted": 2,
+              "correct": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      {
+        "document_type": "pelnomocnictwo",
+        "test_documents": 14,
+        "test_windows": 21,
+        "saved_bf16_checkpoint_metrics": {
+          "overall": {
+            "gold": 96,
+            "predicted": 116,
+            "correct": 81,
+            "precision": 0.6982758620689655,
+            "recall": 0.84375,
+            "f1": 0.7641509433962264
+          },
+          "by_document_type": {
+            "pelnomocnictwo": {
+              "gold": 96,
+              "predicted": 116,
+              "correct": 81,
+              "precision": 0.6982758620689655,
+              "recall": 0.84375,
+              "f1": 0.7641509433962264
+            }
+          },
+          "by_source_kind": {
+            "scan": {
+              "gold": 17,
+              "predicted": 21,
+              "correct": 14,
+              "precision": 0.6666666666666666,
+              "recall": 0.8235294117647058,
+              "f1": 0.7368421052631577
+            },
+            "text-pdf": {
+              "gold": 79,
+              "predicted": 95,
+              "correct": 67,
+              "precision": 0.7052631578947368,
+              "recall": 0.8481012658227848,
+              "f1": 0.7701149425287356
+            }
+          },
+          "by_label": {
+            "ATTORNEY_PERSON": {
+              "gold": 23,
+              "predicted": 26,
+              "correct": 18,
+              "precision": 0.6923076923076923,
+              "recall": 0.782608695652174,
+              "f1": 0.7346938775510203
+            },
+            "ATTORNEY_PESEL": {
+              "gold": 1,
+              "predicted": 1,
+              "correct": 1,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PRINCIPAL_KRS": {
+              "gold": 17,
+              "predicted": 17,
+              "correct": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PRINCIPAL_NIP": {
+              "gold": 17,
+              "predicted": 17,
+              "correct": 17,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "PRINCIPAL_ORG": {
+              "gold": 22,
+              "predicted": 34,
+              "correct": 17,
+              "precision": 0.5,
+              "recall": 0.7727272727272727,
+              "f1": 0.6071428571428571
+            },
+            "SIGNATORY_PERSON": {
+              "gold": 16,
+              "predicted": 21,
+              "correct": 11,
+              "precision": 0.5238095238095238,
+              "recall": 0.6875,
+              "f1": 0.5945945945945946
+            }
+          }
+        }
+      },
+      {
+        "document_type": "przelew",
+        "test_documents": 14,
+        "test_windows": 14,
+        "saved_bf16_checkpoint_metrics": {
+          "overall": {
+            "gold": 43,
+            "predicted": 65,
+            "correct": 37,
+            "precision": 0.5692307692307692,
+            "recall": 0.8604651162790697,
+            "f1": 0.6851851851851851
+          },
+          "by_document_type": {
+            "przelew": {
+              "gold": 43,
+              "predicted": 65,
+              "correct": 37,
+              "precision": 0.5692307692307692,
+              "recall": 0.8604651162790697,
+              "f1": 0.6851851851851851
+            }
+          },
+          "by_source_kind": {
+            "scan": {
+              "gold": 10,
+              "predicted": 19,
+              "correct": 6,
+              "precision": 0.3157894736842105,
+              "recall": 0.6,
+              "f1": 0.41379310344827586
+            },
+            "text-pdf": {
+              "gold": 33,
+              "predicted": 46,
+              "correct": 31,
+              "precision": 0.6739130434782609,
+              "recall": 0.9393939393939394,
+              "f1": 0.7848101265822786
+            }
+          },
+          "by_label": {
+            "DESTINATION_ACCOUNT": {
+              "gold": 4,
+              "predicted": 7,
+              "correct": 3,
+              "precision": 0.42857142857142855,
+              "recall": 0.75,
+              "f1": 0.5454545454545454
+            },
+            "OPERATION_DATE": {
+              "gold": 15,
+              "predicted": 18,
+              "correct": 13,
+              "precision": 0.7222222222222222,
+              "recall": 0.8666666666666667,
+              "f1": 0.7878787878787877
+            },
+            "SOURCE_ACCOUNT": {
+              "gold": 4,
+              "predicted": 12,
+              "correct": 4,
+              "precision": 0.3333333333333333,
+              "recall": 1.0,
+              "f1": 0.5
+            },
+            "TRANSACTION_ID": {
+              "gold": 13,
+              "predicted": 13,
+              "correct": 12,
+              "precision": 0.9230769230769231,
+              "recall": 0.9230769230769231,
+              "f1": 0.9230769230769231
+            },
+            "TRANSFER_AMOUNT": {
+              "gold": 5,
+              "predicted": 7,
+              "correct": 5,
+              "precision": 0.7142857142857143,
+              "recall": 1.0,
+              "f1": 0.8333333333333333
+            },
+            "TRANSFER_TITLE": {
+              "gold": 2,
+              "predicted": 8,
+              "correct": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      }
+    ]
+  }
+}

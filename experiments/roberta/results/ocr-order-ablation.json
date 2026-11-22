@@ -1,0 +1,310 @@
+{
+  "model": "PKOBP/embed-modernbert-68m",
+  "model_revision": "5c76fc72d527c991fcff9265945649a5b3c8e1d2",
+  "validation_design": "Matched 3-fold group CV; identical held-out original/OCR/order-perturbed rows. Control excludes OCR-perturbed and OCR-order-shuffled rows from training only.",
+  "test_documents_included": false,
+  "selected_entity_loss_weights": {
+    "odwolanie": 4,
+    "pelnomocnictwo": 1,
+    "przelew": 4
+  },
+  "training_configuration": {
+    "learning_rate": 7e-05,
+    "batch_size": 16,
+    "evaluation_batch_size": 32,
+    "validation_dtype": "bf16",
+    "epoch_limit": 24,
+    "early_stopping_patience": 4,
+    "window_size": 512,
+    "stride": 96
+  },
+  "pooled_cross_fitted_threshold_micro": {
+    "with_ocr_training": {
+      "gold": 2905,
+      "predicted": 3644,
+      "correct": 2460,
+      "precision": 0.6750823271130626,
+      "recall": 0.846815834767642,
+      "f1": 0.7512597343105818
+    },
+    "without_ocr_training": {
+      "gold": 2905,
+      "predicted": 3494,
+      "correct": 2272,
+      "precision": 0.6502575844304522,
+      "recall": 0.7820998278829604,
+      "f1": 0.7101109548366933
+    },
+    "delta_f1": 0.04114877947388851
+  },
+  "pooled_by_source_kind": {
+    "ocr-perturbed": {
+      "with_ocr_training": {
+        "gold": 739,
+        "predicted": 892,
+        "correct": 631,
+        "precision": 0.7073991031390134,
+        "recall": 0.8538565629228687,
+        "f1": 0.773758430410791
+      },
+      "without_ocr_training": {
+        "gold": 739,
+        "predicted": 840,
+        "correct": 550,
+        "precision": 0.6547619047619048,
+        "recall": 0.7442489851150202,
+        "f1": 0.6966434452184926
+      },
+      "delta_f1": 0.07711498519229831
+    },
+    "ocr-order-shuffled": {
+      "with_ocr_training": {
+        "gold": 726,
+        "predicted": 910,
+        "correct": 599,
+        "precision": 0.6582417582417582,
+        "recall": 0.8250688705234159,
+        "f1": 0.7322738386308069
+      },
+      "without_ocr_training": {
+        "gold": 726,
+        "predicted": 869,
+        "correct": 526,
+        "precision": 0.6052934407364787,
+        "recall": 0.7245179063360881,
+        "f1": 0.6595611285266457
+      },
+      "delta_f1": 0.07271271010416114
+    },
+    "scan": {
+      "with_ocr_training": {
+        "gold": 188,
+        "predicted": 304,
+        "correct": 132,
+        "precision": 0.4342105263157895,
+        "recall": 0.7021276595744681,
+        "f1": 0.5365853658536586
+      },
+      "without_ocr_training": {
+        "gold": 188,
+        "predicted": 296,
+        "correct": 118,
+        "precision": 0.39864864864864863,
+        "recall": 0.6276595744680851,
+        "f1": 0.48760330578512395
+      },
+      "delta_f1": 0.048982060068534616
+    },
+    "text-pdf": {
+      "with_ocr_training": {
+        "gold": 1252,
+        "predicted": 1538,
+        "correct": 1098,
+        "precision": 0.7139141742522757,
+        "recall": 0.8769968051118211,
+        "f1": 0.7870967741935484
+      },
+      "without_ocr_training": {
+        "gold": 1252,
+        "predicted": 1489,
+        "correct": 1078,
+        "precision": 0.7239758226997985,
+        "recall": 0.8610223642172524,
+        "f1": 0.7865742429770157
+      },
+      "delta_f1": 0.0005225312165326734
+    },
+    "original-non-ocr": {
+      "with_ocr_training": {
+        "gold": 1440,
+        "predicted": 1842,
+        "correct": 1230,
+        "precision": 0.6677524429967426,
+        "recall": 0.8541666666666666,
+        "f1": 0.749542961608775
+      },
+      "without_ocr_training": {
+        "gold": 1440,
+        "predicted": 1785,
+        "correct": 1196,
+        "precision": 0.6700280112044817,
+        "recall": 0.8305555555555556,
+        "f1": 0.7417054263565891
+      },
+      "delta_f1": 0.00783753525218589
+    }
+  },
+  "by_document_type": {
+    "odwolanie": {
+      "entity_loss_weight": 4,
+      "with_ocr_training": {
+        "cross_fitted_f1": 0.7486195873292647,
+        "source_f1": {
+          "ocr-perturbed": 0.7669616519174042,
+          "ocr-order-shuffled": 0.7251798561151079,
+          "scan": 0.5038167938931298,
+          "text-pdf": 0.7862679955703211,
+          "original-non-ocr": 0.7504835589941974
+        },
+        "best_epochs": [
+          15,
+          14,
+          7
+        ],
+        "epochs_ran": [
+          19,
+          18,
+          11
+        ],
+        "median_best_epoch": 14,
+        "median_validation_threshold": 0.75
+      },
+      "without_ocr_training": {
+        "cross_fitted_f1": 0.7382823871906843,
+        "source_f1": {
+          "ocr-perturbed": 0.7488986784140969,
+          "ocr-order-shuffled": 0.6944045911047345,
+          "scan": 0.46212121212121215,
+          "text-pdf": 0.7919687674288901,
+          "original-non-ocr": 0.7496353913466213
+        },
+        "best_epochs": [
+          7,
+          9,
+          21
+        ],
+        "epochs_ran": [
+          11,
+          13,
+          24
+        ],
+        "median_best_epoch": 9,
+        "median_validation_threshold": 0.5
+      },
+      "delta_f1": {
+        "overall": 0.010337200138580416,
+        "source": {
+          "ocr-perturbed": 0.018062973503307322,
+          "ocr-order-shuffled": 0.03077526501037342,
+          "scan": 0.04169558177191768,
+          "text-pdf": -0.005700771858568987,
+          "original-non-ocr": 0.0008481676475761146
+        }
+      }
+    },
+    "pelnomocnictwo": {
+      "entity_loss_weight": 1,
+      "with_ocr_training": {
+        "cross_fitted_f1": 0.7074074074074075,
+        "source_f1": {
+          "ocr-perturbed": 0.7251732101616629,
+          "ocr-order-shuffled": 0.6474820143884893,
+          "scan": 0.528,
+          "text-pdf": 0.7689922480620156,
+          "original-non-ocr": 0.7298701298701298
+        },
+        "best_epochs": [
+          4,
+          4,
+          16
+        ],
+        "epochs_ran": [
+          8,
+          8,
+          20
+        ],
+        "median_best_epoch": 4,
+        "median_validation_threshold": 0.0
+      },
+      "without_ocr_training": {
+        "cross_fitted_f1": 0.6980891719745222,
+        "source_f1": {
+          "ocr-perturbed": 0.6983372921615201,
+          "ocr-order-shuffled": 0.6568627450980392,
+          "scan": 0.5172413793103449,
+          "text-pdf": 0.7584000000000001,
+          "original-non-ocr": 0.7206477732793523
+        },
+        "best_epochs": [
+          7,
+          11,
+          13
+        ],
+        "epochs_ran": [
+          11,
+          15,
+          17
+        ],
+        "median_best_epoch": 11,
+        "median_validation_threshold": -0.25
+      },
+      "delta_f1": {
+        "overall": 0.009318235432885236,
+        "source": {
+          "ocr-perturbed": 0.026835918000142844,
+          "ocr-order-shuffled": -0.009380730709549923,
+          "scan": 0.010758620689655163,
+          "text-pdf": 0.01059224806201553,
+          "original-non-ocr": 0.009222356590777525
+        }
+      }
+    },
+    "przelew": {
+      "entity_loss_weight": 4,
+      "with_ocr_training": {
+        "cross_fitted_f1": 0.8051075268817205,
+        "source_f1": {
+          "ocr-perturbed": 0.8230769230769232,
+          "ocr-order-shuffled": 0.8091603053435115,
+          "scan": 0.6285714285714286,
+          "text-pdf": 0.8259587020648967,
+          "original-non-ocr": 0.7792792792792792
+        },
+        "best_epochs": [
+          5,
+          8,
+          12
+        ],
+        "epochs_ran": [
+          9,
+          12,
+          16
+        ],
+        "median_best_epoch": 8,
+        "median_validation_threshold": 1.25
+      },
+      "without_ocr_training": {
+        "cross_fitted_f1": 0.6542324246771879,
+        "source_f1": {
+          "ocr-perturbed": 0.620545073375262,
+          "ocr-order-shuffled": 0.6122448979591838,
+          "scan": 0.5192307692307693,
+          "text-pdf": 0.8111455108359132,
+          "original-non-ocr": 0.7400468384074942
+        },
+        "best_epochs": [
+          6,
+          10,
+          7
+        ],
+        "epochs_ran": [
+          10,
+          14,
+          11
+        ],
+        "median_best_epoch": 7,
+        "median_validation_threshold": 1.0
+      },
+      "delta_f1": {
+        "overall": 0.1508751022045326,
+        "source": {
+          "ocr-perturbed": 0.20253184970166116,
+          "ocr-order-shuffled": 0.19691540738432767,
+          "scan": 0.10934065934065929,
+          "text-pdf": 0.014813191228983502,
+          "original-non-ocr": 0.03923244087178501
+        }
+      }
+    }
+  }
+}
